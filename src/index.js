@@ -23,20 +23,20 @@ loadMoreBtn.addEventListener('click', () => {
 gallery.addEventListener('click', openModal);
 
 //================================ infinite-scroll ====================
-// const infScroll = new InfiniteScroll(gallery, {
-//   responseType: 'text',
-//   history: false,
-//   path: function () {
-//     return `https://cors-anywhere.herokuapp.com/https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${apiService.query}&page=${apiService.page}&per_page=12&key=${apiService.apiKey}`;
-//   },
-// });
+const infScroll = new InfiniteScroll(gallery, {
+  responseType: 'text',
+  history: false,
+  path: function () {
+    return `https://cors-anywhere.herokuapp.com/https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${apiService.query}&page=${apiService.page}&per_page=12&key=${apiService.apiKey}`;
+  },
+});
 
-// infScroll.on('load', response => {
-//   const result = JSON.parse(response);
+infScroll.on('load', response => {
+  const result = JSON.parse(response);
 
-//   renderGallery(result.hits);
-//   apiService.incrPage();
-// });
+  renderGallery(result.hits);
+  apiService.incrPage();
+});
 //===========================================================================
 
 form.addEventListener('submit', e => {
@@ -48,6 +48,6 @@ form.addEventListener('submit', e => {
   form.reset();
 
   apiService.resetPage();
-  // infScroll.loadNextPage(); // infinite-scroll
+  infScroll.loadNextPage(); // infinite-scroll
     loadMoreBtn.style.display = 'block';   // button
 });
